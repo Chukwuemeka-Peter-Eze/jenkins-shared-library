@@ -223,11 +223,11 @@ libraryResource()
 
 ---
 
-# 🏗 Architecture
+# Architecture
 
 ```text
                          ┌───────────────────────────┐
-                         │     Jenkins Controller     │
+                         │     Jenkins Controller    │
                          │                           │
                          │   Jenkinsfile             │
                          │   Jenkinsfile-            │
@@ -237,7 +237,7 @@ libraryResource()
                                        │ library(...)
                                        ▼
                     ┌──────────────────────────────────┐
-                    │       Jenkins Shared Library      │
+                    │       Jenkins Shared Library     │
                     │                                  │
                     │  vars/                           │
                     │   ├── reusable pipeline steps    │
@@ -267,7 +267,7 @@ The important architectural boundary is:
 │ Image name                                      │
 │ Deployment host                                 │
 │ Application port                                │
-│ Environment configuration                        │
+│ Environment configuration                       │
 │ Credentials IDs                                 │
 └──────────────────────┬──────────────────────────┘
                        │
