@@ -3,7 +3,6 @@ package com.example
 
 class Deploy implements Serializable {
 
-```
 def script
 
 Deploy(script) {
@@ -24,6 +23,5 @@ def run(Map config) {
 
     script.sh remoteCommand
 }
-```
 
 }
