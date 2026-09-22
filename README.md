@@ -314,6 +314,17 @@ Jenkins-shared-library/
 │   ├── setup.md
 │   └── troubleshooting.md
 │
+├── docs/images/
+│   ├── 01-jenkins-shared-library-configuration.png
+│   ├── 02-shared-library-pipeline-success.png
+│   ├── 03-pipeline-stages.png
+│   ├── 04-jenkins-build-console.png
+│   ├── 05-docker-hub-image.png
+│   ├── 06-ec2-deployed-application.png
+│   ├── 07-jenkins-credentials.png
+│   └── 08-github-repository-structure.png
+│
+│
 ├── resources/
 │   └── com/
 │       └── example/
@@ -860,6 +871,76 @@ The validation includes:
 - Notification rendering
 
 The repository also retains the baseline `Jenkinsfile` so that the library-powered pipeline can be compared with the non-library approach.
+
+---
+
+# Project Evidence
+
+The following screenshots provide visual evidence of the Jenkins Shared Library configuration, pipeline execution, container publishing, deployment, and repository structure demonstrated by this project.
+
+## Jenkins Shared Library Configuration
+
+The Jenkins controller is configured to retrieve and load the Shared Library from the GitHub repository.
+
+![Jenkins Shared Library configuration](docs/images/01-jenkins-shared-library-configuration.png)
+
+---
+
+## Successful Shared Library Pipeline
+
+The `Jenkinsfile-SharedLibrary` pipeline successfully loads and consumes the reusable Shared Library steps.
+
+![Successful Jenkins Shared Library pipeline](docs/images/02-shared-library-pipeline-success.png)
+
+---
+
+## Pipeline Stages
+
+The pipeline demonstrates the complete CI/CD workflow from testing and application build through container creation, image publishing, and deployment.
+
+![Jenkins pipeline stages](docs/images/03-pipeline-stages.png)
+
+---
+
+## Jenkins Build Console
+
+The Jenkins console output provides execution evidence for the pipeline and its individual stages.
+
+![Successful Jenkins build console](docs/images/04-jenkins-build-console.png)
+
+---
+
+## Docker Hub Image
+
+The resulting Docker image is published to Docker Hub as part of the CI/CD workflow.
+
+![Docker Hub published image](docs/images/05-docker-hub-image.png)
+
+---
+
+## Deployed Application
+
+The application is deployed to the EC2 demonstration environment and made available through the configured application endpoint.
+
+![Deployed application running on EC2](docs/images/06-ec2-deployed-application.png)
+
+---
+
+## Jenkins Credentials Configuration
+
+The pipeline uses Jenkins-managed credentials for authentication rather than storing secrets in source control.
+
+> **Security note:** Sensitive values, private keys, tokens, passwords, and other secret material are intentionally excluded or redacted from this screenshot.
+
+![Jenkins credentials configuration](docs/images/07-jenkins-credentials.png)
+
+---
+
+## Repository Structure
+
+The GitHub repository contains the Jenkins Shared Library implementation, demonstration application, pipeline definitions, and supporting documentation.
+
+![GitHub repository structure](docs/images/08-github-repository-structure.png)
 
 ---
 

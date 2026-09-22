@@ -10,7 +10,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
+        maven 'maven-3.9'
     }
 
     environment {
@@ -19,10 +19,10 @@ pipeline {
         IMAGE_TAG         = 'java-maven-1.0'
         IMAGE_NAME        = "${DOCKER_NAMESPACE}/${APP_NAME}:${IMAGE_TAG}"
 
-        DEPLOY_HOST       = '18.184.54.160'
-        DEPLOY_USER       = 'ec2-user'
+        DEPLOY_HOST       = '3.80.214.179'
+        DEPLOY_USER       = 'ubuntu'
         APP_PORT          = '3080'
-        SSH_CREDENTIAL_ID = 'ec2-server-key'
+        SSH_CREDENTIAL_ID = 'deploy-ssh-credentials'
     }
 
     stages {
