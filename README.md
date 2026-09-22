@@ -286,7 +286,7 @@ The important architectural boundary is:
 
 ---
 
-# 🛠 Technology Stack
+# Technology Stack
 
 | Technology | Purpose |
 |---|---|
