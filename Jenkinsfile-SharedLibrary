@@ -1,0 +1,75 @@
+#!/usr/bin/env groovy
+
+library identifier: 'Jenkins-shared-library@main', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+     remote: 'https://github.com/Chukwuemeka-Peter-Eze/Jenkins-shared-library.git'
+    ]
+)
+
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'
+    }
+
+    environment {
+        DOCKER_NAMESPACE  = 'pierrechukason'
+        APP_NAME          = 'demo-app'
+        IMAGE_TAG         = 'java-maven-1.0'
+        IMAGE_NAME        = "${DOCKER_NAMESPACE}/${APP_NAME}:${IMAGE_TAG}"
+
+        DEPLOY_HOST       = '18.184.54.160'
+        DEPLOY_USER       = 'ec2-user'
+        APP_PORT          = '3080'
+        SSH_CREDENTIAL_ID = 'ec2-server-key'
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                runTests()
+            }
+        }
+
+        stage('Build App') {
+            steps {
+                buildJar()
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                script {
+                    buildImage(env.IMAGE_NAME)
+                    dockerLogin()
+                    dockerPush(env.IMAGE_NAME)
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                deployApp(
+                    host: env.DEPLOY_HOST,
+                    user: env.DEPLOY_USER,
+                    port: env.APP_PORT,
+                    image: env.IMAGE_NAME,
+                    sshCredentialId: env.SSH_CREDENTIAL_ID
+                )
+            }
+        }
+    }
+
+    post {
+        success {
+            notifyBuildStatus('SUCCESS')
+        }
+        failure {
+            notifyBuildStatus('FAILURE')
+        }
+        always {
+            sh 'docker logout || true'
+        }
+    }
+}
