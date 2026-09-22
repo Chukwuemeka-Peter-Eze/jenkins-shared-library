@@ -21,11 +21,15 @@ pipeline {
 
         DEPLOY_HOST       = '3.80.214.179'
         DEPLOY_USER       = 'ubuntu'
+
+        // Application listens on port 3080 inside the container
         APP_PORT          = '3080'
+
         SSH_CREDENTIAL_ID = 'deploy-ssh-credentials'
     }
 
     stages {
+
         stage('Test') {
             steps {
                 runTests()
@@ -65,9 +69,11 @@ pipeline {
         success {
             notifyBuildStatus('SUCCESS')
         }
+
         failure {
             notifyBuildStatus('FAILURE')
         }
+
         always {
             sh 'docker logout || true'
         }
